@@ -1,31 +1,26 @@
-# Seller Pro — Central de Chamados Especiais
+# Seller Pro — Dashboard conectado ao Supabase (v0.2)
 
-Versão de **testes** do frontend estático, conectada ao Supabase existente.
-Este pacote contém a versão validada de **login + administração de usuários + primeiro acesso**, ainda **não** o dashboard compartilhado de chamados.
+Substitua **todos os arquivos** na raiz do repositório GitHub Pages pelos arquivos deste ZIP, preservando as pastas. Commit sugerido: `feat: dashboard de chamados com filtros Supabase`.
 
-## Arquivos
-- `index.html`: entrada do GitHub Pages
-- `css/style.css`: estilos claros e escuros
-- `js/app.js`: interface e integração com Supabase
-- `logo.png`: logo enviada
-- `.nojekyll`: desativa o processamento Jekyll do Pages
-- `supabase/functions/definir-senha/index.ts`: cópia do código anteriormente usado
-- `supabase/functions/criar-funcionario/README.md`: instruções para recuperar o código real da função publicada (não temos snapshot validado)
-- `supabase/migrations/`: histórico parcial; NÃO rodar novamente sem revisar
+## O que funciona
+- Login e primeiro acesso existentes, sem remover administração de funcionários.
+- Dashboard em modo **somente leitura**: total, não resolvidos, aguardando Amazon, pendente seller, resolvidos, concluídos.
+- Filtros de mês de abertura, status e pesquisa por título/ID; tabela com tempo decorrido e marcação para reunião.
+- Atualizar dados do Supabase. Nenhum dado fictício é exibido. Banco vazio mostra zeros.
 
-## Publicar no GitHub Pages
-1. Criar repositório `sellerpro-central-chamados`.
-2. Enviar o conteúdo desta pasta para a raiz da branch `main` (o `index.html` precisa estar na raiz).
-3. GitHub → Settings → Pages → Deploy from a branch → `main` → `/(root)` → Save.
-4. Acessar `https://SEU-USUARIO.github.io/sellerpro-central-chamados/`.
-5. No Supabase → Authentication → URL Configuration, adicionar a URL publicada aos Redirect URLs necessários para recuperação de senha.
-6. Testar login, criação de conta fictícia e troca obrigatória de senha SEM dados reais.
+## Antes de compartilhar com a equipe
+- Não inserir dados pessoais reais enquanto não terminar revisão de segurança de RLS, privilégios das tabelas, Storage, recuperação de senha e auditoria.
+- Esta versão **não** cria chamados e **não** importa formulários ou planilhas.
+- Para usuários com senha temporária ainda não trocada, a aplicação deve impedir o acesso ao dashboard.
+- Os indicadores representam os casos **já cadastrados na tabela `chamados`**, não as planilhas ainda não importadas.
+- O status `Concluido` foi mantido conforme o SQL inicial. A regra de negócio será refinada antes da importação.
+- O Pages é público; somente o frontend fica hospedado nele, e a proteção real dos dados depende do Supabase.
 
-## Desenvolvimento local
-Na pasta, usar VS Code Live Server ou `python -m http.server 8000`, e acessar http://localhost:8000.
+## Teste
+1. Publicar na branch `main` do GitHub.
+2. Fazer login como administrador.
+3. Confirmar que dashboard vazio mostra números zero, não inventados.
+4. Clicar em Atualizar dados e verificar ausência de erros no navegador.
+5. Testar login de usuário comum e o bloqueio de conta ainda sem troca de senha.
 
-## Importante
-- Nunca versionar credenciais secretas. A publishable key no JS é pública.
-- O Pages é hospedagem estática; funções são executadas no Supabase.
-- Ainda falta auditoria de segurança, tratamento completo de recuperação de senha, migrações fielmente versionadas e integração de tickets ao Supabase.
-- Veja `docs/PRIVACIDADE-E-DEPLOY.md`.
+O código ainda é uma versão inicial e precisa de testes de segurança antes da utilização real.
