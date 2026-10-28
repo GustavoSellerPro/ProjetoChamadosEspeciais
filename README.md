@@ -1,26 +1,17 @@
-# Seller Pro — Dashboard conectado ao Supabase (v0.2)
+# Central de Chamados Especiais — Seller Pro v0.3
 
-Substitua **todos os arquivos** na raiz do repositório GitHub Pages pelos arquivos deste ZIP, preservando as pastas. Commit sugerido: `feat: dashboard de chamados com filtros Supabase`.
+## Atualização
+- Layout desktop-first, com barra lateral e tabela ampla, responsivo para tablets e celulares.
+- Status consolidados: Aguardando Amazon, Pendente Seller e Finalizado.
+- Preserva autenticação, cadastro de funcionários e troca de senha da versão anterior.
+- Dashboard somente leitura.
 
-## O que funciona
-- Login e primeiro acesso existentes, sem remover administração de funcionários.
-- Dashboard em modo **somente leitura**: total, não resolvidos, aguardando Amazon, pendente seller, resolvidos, concluídos.
-- Filtros de mês de abertura, status e pesquisa por título/ID; tabela com tempo decorrido e marcação para reunião.
-- Atualizar dados do Supabase. Nenhum dado fictício é exibido. Banco vazio mostra zeros.
+## Ordem de instalação
+1. Faça backup dos dados do Supabase antes da migração.
+2. Execute `supabase/migrations/003-status-unificado.sql` no SQL Editor. Este arquivo altera a regra de status e converte os registros antigos.
+3. Envie os arquivos do ZIP para a raiz do repositório GitHub Pages, substituindo os antigos.
+4. Commit sugerido: `feat: dashboard responsivo e status unificados`.
+5. Teste login ADM/Usuário, navegação, tema, filtros e celular.
 
-## Antes de compartilhar com a equipe
-- Não inserir dados pessoais reais enquanto não terminar revisão de segurança de RLS, privilégios das tabelas, Storage, recuperação de senha e auditoria.
-- Esta versão **não** cria chamados e **não** importa formulários ou planilhas.
-- Para usuários com senha temporária ainda não trocada, a aplicação deve impedir o acesso ao dashboard.
-- Os indicadores representam os casos **já cadastrados na tabela `chamados`**, não as planilhas ainda não importadas.
-- O status `Concluido` foi mantido conforme o SQL inicial. A regra de negócio será refinada antes da importação.
-- O Pages é público; somente o frontend fica hospedado nele, e a proteção real dos dados depende do Supabase.
-
-## Teste
-1. Publicar na branch `main` do GitHub.
-2. Fazer login como administrador.
-3. Confirmar que dashboard vazio mostra números zero, não inventados.
-4. Clicar em Atualizar dados e verificar ausência de erros no navegador.
-5. Testar login de usuário comum e o bloqueio de conta ainda sem troca de senha.
-
-O código ainda é uma versão inicial e precisa de testes de segurança antes da utilização real.
+## Segurança
+O GitHub Pages é público. Não inclua segredos, arquivos de sellers ou tokens privados no repositório. A chave publishable é pública; segurança depende de RLS e das funções de backend. Não use dados pessoais reais até validar as políticas.
