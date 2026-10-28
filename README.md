@@ -1,17 +1,16 @@
-# Central de Chamados Especiais — Seller Pro v0.3
+# Central de Chamados — v0.5
 
-## Atualização
-- Layout desktop-first, com barra lateral e tabela ampla, responsivo para tablets e celulares.
-- Status consolidados: Aguardando Amazon, Pendente Seller e Finalizado.
-- Preserva autenticação, cadastro de funcionários e troca de senha da versão anterior.
-- Dashboard somente leitura.
+Atualização sobre a v0.4. Interface para desktop/mobile, dashboard com cores, menu recolhível, perfil por avatar e cadastro único de sellers vinculado a vários chamados.
 
-## Ordem de instalação
-1. Faça backup dos dados do Supabase antes da migração.
-2. Execute `supabase/migrations/003-status-unificado.sql` no SQL Editor. Este arquivo altera a regra de status e converte os registros antigos.
-3. Envie os arquivos do ZIP para a raiz do repositório GitHub Pages, substituindo os antigos.
-4. Commit sugerido: `feat: dashboard responsivo e status unificados`.
-5. Teste login ADM/Usuário, navegação, tema, filtros e celular.
+## Instalar
+1. No **SQL Editor** do Supabase, execute `supabase/migrations/004-seller-case-sync.sql` uma vez. Ele cria trigger de atualização e índices. Não apaga registros.
+2. Substitua os arquivos do GitHub Pages pelo conteúdo deste ZIP e faça commit `feat: entidades sellers e dashboard desktop v05`.
+3. Teste com contas e dados fictícios: abrir seller, editar seus dados, visualizar vários chamados, recolher menu, avatar, ordenação e responsividade.
 
-## Segurança
-O GitHub Pages é público. Não inclua segredos, arquivos de sellers ou tokens privados no repositório. A chave publishable é pública; segurança depende de RLS e das funções de backend. Não use dados pessoais reais até validar as políticas.
+## Importante
+- O relacionamento 1:N já existe no banco (`sellers` → `chamados.seller_id`).
+- A edição do cadastro centralizado do seller está disponível para usuários autenticados **ativos** conforme suas políticas RLS. Nenhum dado pessoal deve ser enviado ao repositório.
+- **Google Forms não está sincronizado ainda.** A integração automática exige configurar Apps Script / endpoint seguro e validação de duplicações. O formulário não é importado automaticamente nesta versão.
+- A ordenação usa `chamados.atualizado_em`; neste momento registra edições manuais dos chamados. Quando a API Zendesk ou o fluxo de mensagens estiver integrado, atualizaremos essa data pelos eventos relevantes.
+- `email`, `telefone`, `mcid` e `cnpj` continuam na tabela `sellers`; RLS deve ser auditado antes de produção. 
+- Não há exclusão de sellers nem de chamados nesta versão.
