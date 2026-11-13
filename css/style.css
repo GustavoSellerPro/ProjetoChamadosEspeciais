@@ -30,3 +30,32 @@ body.light .status.amazon{background:#f2d8dc}
 body.light .status.seller{background:#f2e5c6}
 body.light .status.final{background:#d5eadd}
 @media(max-width:780px){.category-grid.has-subcategory,.category-grid.has-third-level{grid-template-columns:1fr}}
+
+/* v0.10 - métricas interativas e navegação */
+.metric-click{cursor:pointer;transition:transform .15s,border-color .15s}
+.metric-click:hover,.metric-click:focus-visible{transform:translateY(-2px);border-color:var(--accent);outline:2px solid transparent;box-shadow:0 6px 18px #0002}
+#changePasswordForm .button-secondary{margin-top:12px;width:100%}
+#changePasswordForm .primary{width:100%}
+#meetingTable .summary,#formsTable .summary{max-width:510px}
+
+
+/* v0.12 — SOMENTE cabeçalho do menu / logos oficiais enviados pelo usuário */
+.sidebar{background:#101114;transition:width .32s ease,min-width .32s ease}
+.sidebar .side-top{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:13px 10px 8px;min-height:116px;gap:2px}
+.sidebar .identity{position:relative;display:block;width:100%;height:77px;min-height:77px;overflow:hidden}
+.sidebar .side-logo{position:absolute;top:50%;left:50%;display:block;object-fit:contain;max-width:none;width:auto;height:auto;transition:opacity .25s ease,transform .32s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.sidebar .side-logo-full{width:min(100%,230px);transform:translate(-50%,-50%) scale(1);opacity:1}
+.sidebar .side-logo-small{height:70px;transform:translate(-50%,-50%) scale(.78);opacity:0}
+.sidebar .side-top #collapseMenu{position:relative;align-self:flex-end;padding:4px 9px;min-height:26px;line-height:1.2;font-size:16px;background:transparent;color:#d5d5dc;border-color:#ffffff22}
+body.menu-collapsed .sidebar .side-top{flex-direction:column;min-height:116px;padding:12px 5px 8px}
+body.menu-collapsed .sidebar .identity{width:100%;height:77px;min-height:77px}
+body.menu-collapsed .sidebar .side-logo-full{opacity:0;transform:translate(-50%,-50%) scale(.72)}
+body.menu-collapsed .sidebar .side-logo-small{opacity:1;transform:translate(-50%,-50%) scale(1)}
+body.menu-collapsed .sidebar .side-top #collapseMenu{align-self:center}
+@media(max-width:740px){
+ .sidebar .side-top,body.menu-collapsed .sidebar .side-top{min-height:116px;padding:13px 10px 8px}
+ body.menu-collapsed .sidebar .side-logo-full{opacity:1;transform:translate(-50%,-50%) scale(1)}
+ body.menu-collapsed .sidebar .side-logo-small{opacity:0;transform:translate(-50%,-50%) scale(.78)}
+ body.menu-collapsed .sidebar .side-top #collapseMenu{align-self:flex-end}
+}
+@media(prefers-reduced-motion:reduce){.sidebar,.sidebar .side-logo{transition:none!important}}
