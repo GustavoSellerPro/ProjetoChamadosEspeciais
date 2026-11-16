@@ -30,3 +30,209 @@ body.light .status.amazon{background:#f2d8dc}
 body.light .status.seller{background:#f2e5c6}
 body.light .status.final{background:#d5eadd}
 @media(max-width:780px){.category-grid.has-subcategory,.category-grid.has-third-level{grid-template-columns:1fr}}
+
+/* v0.10 - métricas interativas e navegação */
+.metric-click{cursor:pointer;transition:transform .15s,border-color .15s}
+.metric-click:hover,.metric-click:focus-visible{transform:translateY(-2px);border-color:var(--accent);outline:2px solid transparent;box-shadow:0 6px 18px #0002}
+#changePasswordForm .button-secondary{margin-top:12px;width:100%}
+#changePasswordForm .primary{width:100%}
+#meetingTable .summary,#formsTable .summary{max-width:510px}
+
+
+
+/* v0.13 — cabeçalho compacto; única mudança visual nesta versão.
+   Logo aberto à esquerda + seta para recolher à direita.
+   Logo SP e seta para expandir abaixo quando fechado. */
+.sidebar{background:#101114;transition:width .26s ease,min-width .26s ease}
+.sidebar .side-top{
+  display:grid;grid-template-columns:minmax(0,1fr) 28px;
+  align-items:center;justify-content:stretch;column-gap:6px;
+  padding:11px 11px;min-height:66px;height:66px;
+  flex:0 0 66px;overflow:hidden;
+}
+.sidebar .side-top .identity{
+  position:relative;display:block;width:100%;height:44px;
+  min-height:0;min-width:0;overflow:hidden;
+}
+.sidebar .side-logo{
+  display:block;position:absolute;top:50%;left:0;
+  object-fit:contain;object-position:left center;
+  height:auto;max-height:43px;width:auto;max-width:100%;
+  pointer-events:none;
+  transition:opacity .18s ease, transform .26s ease;
+}
+.sidebar .side-logo-full{
+  width:100%;max-width:168px;
+  opacity:1;transform:translateY(-50%) scale(1);
+}
+.sidebar .side-logo-small{
+  width:50px;max-height:43px;
+  opacity:0;transform:translateY(-50%) scale(.82);
+}
+.sidebar .side-top .menu-arrow-toggle{
+  display:grid;place-items:center;position:static;align-self:center;
+  width:28px;height:30px;min-height:30px;
+  margin:0;padding:0;border-radius:8px;
+  background:#24262c;border:1px solid #ffffff27;color:#e9e9ec;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.sidebar .menu-arrow-toggle:hover,.sidebar .menu-arrow-toggle:focus-visible{
+  background:#f5802726;border-color:#f58027;color:#ff9a54;
+}
+.sidebar .menu-arrow-toggle svg{display:block;transition:transform .25s ease}
+body.menu-collapsed .sidebar .side-top{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:9px 5px 8px;gap:5px;
+  height:101px;min-height:101px;flex-basis:101px;
+}
+body.menu-collapsed .sidebar .side-top .identity{
+  width:56px;min-width:0;height:55px;flex:0 0 55px;
+}
+body.menu-collapsed .sidebar .side-logo-full{
+  opacity:0;transform:translateY(-50%) scale(.75);
+}
+body.menu-collapsed .sidebar .side-logo-small{
+  left:50%;width:54px;max-width:54px;max-height:53px;
+  opacity:1;transform:translate(-50%,-50%) scale(1);
+  object-position:center;
+}
+body.menu-collapsed .sidebar .side-top .menu-arrow-toggle{
+  width:27px;height:27px;min-height:27px;flex:0 0 27px;
+}
+body.menu-collapsed .sidebar .menu-arrow-toggle svg{transform:rotate(180deg)}
+/* No celular, a barra é um painel completo que desliza: sempre exibe a logo maior. */
+@media(max-width:740px){
+ body.menu-collapsed .sidebar .side-top{
+   display:grid;grid-template-columns:minmax(0,1fr) 28px;
+   justify-content:stretch;align-items:center;
+   gap:6px;padding:11px;min-height:66px;height:66px;flex-basis:66px;
+ }
+ body.menu-collapsed .sidebar .side-top .identity{width:100%;height:44px;flex:auto}
+ body.menu-collapsed .sidebar .side-logo-full{opacity:1;transform:translateY(-50%) scale(1)}
+ body.menu-collapsed .sidebar .side-logo-small{opacity:0;transform:translate(-50%,-50%) scale(.82)}
+ body.menu-collapsed .sidebar .side-top .menu-arrow-toggle{width:28px;height:30px;min-height:30px;flex:auto}
+ body.menu-collapsed .sidebar .menu-arrow-toggle svg{transform:rotate(0deg)}
+}
+@media(prefers-reduced-motion:reduce){
+ .sidebar,.sidebar .side-logo,.sidebar .menu-arrow-toggle svg{transition:none!important}
+}
+
+/* v0.14 — Identidade visual unificada nas telas de autenticação.
+   Mantém o layout e a animação do menu lateral da v0.13 inalterados. */
+.auth-card .brand-logo {
+  display:block;
+  width:min(100%, 290px);
+  height:auto;
+  max-height:88px;
+  object-fit:contain;
+  object-position:left center;
+  margin:0 0 18px;
+}
+@media (max-width:420px) {
+  .auth-card .brand-logo { width:min(100%,260px); }
+}
+
+
+/* v0.15 — links automáticos do Zendesk e dashboard visual */
+.ticket-link{font-weight:700;color:var(--accent);text-decoration:none;border-bottom:1px dashed transparent;transition:border-color .15s,color .15s}
+.ticket-link:hover,.ticket-link:focus-visible{color:var(--accent2);border-color:currentColor}
+.stats-dashboard{grid-template-columns:repeat(6,minmax(0,1fr));grid-template-areas:'total total open open amazon amazon' 'seller seller seller final final final';gap:14px}
+.metric-total{grid-area:total}.metric-open{grid-area:open}.metric-amazon{grid-area:amazon}.metric-seller{grid-area:seller}.metric-final{grid-area:final}
+.metric-card{display:flex;align-items:center;gap:16px;min-height:118px;padding:20px 18px;position:relative;overflow:hidden}
+.metric-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px;background:var(--accent)}
+.metric-card.red::before{background:var(--red)}
+.metric-card.amber::before{background:var(--amber)}
+.metric-card.green::before{background:var(--green)}
+.metric-card small{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.metric-card strong{display:block;font-size:38px;line-height:1.05;margin:2px 0 4px}
+.metric-note{display:block;font-size:13px;color:var(--muted)}
+.metric-visual{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;flex:0 0 56px;background:color-mix(in srgb, var(--surface2) 70%, white 30%)}
+.metric-icon{position:relative;display:grid;place-items:center;width:40px;height:40px;font-size:24px;color:var(--accent)}
+.metric-card.red .metric-icon{color:var(--red)} .metric-card.amber .metric-icon{color:var(--amber)} .metric-card.green .metric-icon{color:var(--green)}
+.icon-earth .earth-core{display:inline-block;transform-origin:center center;transition:transform .45s ease}
+.metric-total:hover .earth-core,.metric-total:focus-visible .earth-core{transform:rotate(360deg)}
+.icon-dots{display:flex;gap:4px;align-items:flex-end;justify-content:center}
+.icon-dots span{display:block;width:7px;height:7px;border-radius:50%;background:currentColor;animation:none;transform:translateY(0)}
+.metric-open:hover .icon-dots span,.metric-open:focus-visible .icon-dots span{animation:bounceDot .8s infinite}
+.metric-open:hover .icon-dots span:nth-child(2),.metric-open:focus-visible .icon-dots span:nth-child(2){animation-delay:.14s}
+.metric-open:hover .icon-dots span:nth-child(3),.metric-open:focus-visible .icon-dots span:nth-child(3){animation-delay:.28s}
+.sync-ring{position:absolute;inset:4px;border:2px solid color-mix(in srgb, currentColor 35%, transparent);border-top-color:currentColor;border-radius:50%}
+.sync-arrow{font-size:18px;line-height:1;display:inline-block;transition:transform .4s ease}
+.metric-amazon:hover .sync-ring,.metric-amazon:focus-visible .sync-ring{animation:spinRing .9s linear infinite}
+.metric-amazon:hover .sync-arrow,.metric-amazon:focus-visible .sync-arrow{transform:rotate(360deg)}
+.icon-wave{font-size:0}
+.person-body{font-size:22px;display:inline-block}
+.person-hand{position:absolute;right:-2px;top:2px;font-size:14px;transform-origin:left bottom;opacity:.85}
+.metric-seller:hover .person-hand,.metric-seller:focus-visible .person-hand{animation:waveHand 1s ease-in-out infinite}
+.check-mark{display:inline-block;font-size:26px;transition:transform .25s ease}
+.metric-final:hover .check-mark,.metric-final:focus-visible .check-mark{animation:checkHop .65s ease-in-out 1}
+.metric-modal-head{margin-bottom:14px}
+.metric-modal-head p{margin:8px 0 0;color:var(--muted)}
+.metric-case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.metric-case-card{padding:15px;border:1px solid var(--stroke);border-radius:14px;background:var(--surface2);box-shadow:0 8px 20px #00000014;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+.metric-case-card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 12px 24px #0000001a}
+.metric-case-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}
+.metric-case-top h4{margin:2px 0 0;font-size:16px}
+.metric-case-top small{color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.metric-case-summary{margin:0 0 12px;color:var(--text);min-height:48px}
+.metric-case-meta{display:grid;gap:8px;margin-bottom:12px;font-size:13px;color:var(--muted)}
+.metric-case-meta b{color:var(--text)}
+.metric-case-actions{display:flex;justify-content:flex-end}
+body.light .metric-visual{background:#e5e9ef}
+body.light .metric-card{background:#f0f1f4}
+body.light .metric-case-card{background:#eef1f5}
+@keyframes bounceDot{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-7px)}}
+@keyframes spinRing{to{transform:rotate(360deg)}}
+@keyframes waveHand{0%,100%{transform:rotate(0)}20%{transform:rotate(18deg)}40%{transform:rotate(-6deg)}60%{transform:rotate(16deg)}80%{transform:rotate(-4deg)}}
+@keyframes checkHop{0%{transform:translateY(0) rotate(0)}30%{transform:translateY(-5px) rotate(-8deg)}60%{transform:translateY(0) rotate(12deg)}100%{transform:translateY(0) rotate(0)}}
+@media(max-width:1100px){.stats-dashboard{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:'total open' 'amazon seller' 'final final'}}
+@media(max-width:740px){.stats-dashboard{grid-template-columns:1fr;grid-template-areas:'total' 'open' 'amazon' 'seller' 'final'}.metric-card{min-height:110px;padding:16px}.metric-card strong{font-size:32px}.metric-case-grid{grid-template-columns:1fr}}
+
+
+/* v0.19 — cards compactos e popup em formato de lista */
+.stats-dashboard{grid-template-columns:repeat(5,minmax(0,1fr));grid-template-areas:"total open amazon seller final";gap:10px;margin-bottom:14px}
+.stats-dashboard .metric-card{min-height:86px;max-height:104px;padding:13px 12px;gap:10px;border-radius:12px;align-items:center}
+.stats-dashboard .metric-card::before{width:3px}
+.stats-dashboard .metric-visual{width:43px;height:43px;flex-basis:43px;border-radius:11px}
+.stats-dashboard .metric-icon{width:35px;height:35px}
+.stats-dashboard .metric-copy{min-width:0;flex:1}
+.stats-dashboard .metric-card small{font-size:10px;min-height:0;line-height:1.15;letter-spacing:.025em}
+.stats-dashboard .metric-card strong{font-size:28px;line-height:1;margin:3px 0 4px}
+.stats-dashboard .metric-note{font-size:10px;line-height:1.2;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.stats-dashboard .circular-arrow{width:30px;height:30px}
+.stats-dashboard .earth-outline{width:26px;height:26px}
+.metric-modal-head{display:flex;align-items:center;gap:12px;margin-bottom:13px}
+.metric-modal-head p{margin:0;font-size:13px}
+.metric-list-scroll{border:1px solid var(--stroke);border-radius:11px;max-height:62vh;overflow:auto}
+.metric-list-table{min-width:830px;width:100%;border-collapse:collapse;table-layout:fixed}
+.metric-list-table th{font-size:10px;letter-spacing:.035em;text-transform:uppercase;white-space:nowrap;position:sticky;top:0;background:var(--surface2);z-index:1;padding:11px 10px}
+.metric-list-table td{font-size:12px;line-height:1.4;vertical-align:middle;padding:10px;border-bottom:1px solid var(--stroke)}
+.metric-list-table th:nth-child(1){width:17%}.metric-list-table th:nth-child(2){width:14%}.metric-list-table th:nth-child(3){width:18%}
+.metric-list-table th:nth-child(4){width:26%}.metric-list-table th:nth-child(5){width:16%}.metric-list-table th:nth-child(6){width:9%}
+.metric-list-table tbody tr:hover{background:color-mix(in srgb,var(--accent) 5%,transparent)}
+.metric-list-table tbody tr:last-child td{border-bottom:none}
+.metric-secondary{display:block;color:var(--muted);font-size:11px;font-weight:400;margin-top:3px;overflow-wrap:anywhere}
+.metric-list-summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:100%;overflow-wrap:anywhere}
+.metric-list-ticket{overflow-wrap:anywhere}.metric-date{white-space:nowrap;color:var(--muted);font-size:11px!important}
+.metric-list-table .status{font-size:10px}.metric-details-btn{padding:7px 9px;font-size:11px}
+.metric-empty{text-align:center;color:var(--muted);padding:20px!important}
+@media(max-width:1280px){.stats-dashboard{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-areas:"total open amazon" "seller seller final"}}
+@media(max-width:860px){.stats-dashboard{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"total open" "amazon seller" "final final"}}
+@media(max-width:560px){.stats-dashboard{grid-template-columns:1fr;grid-template-areas:"total" "open" "amazon" "seller" "final"}.stats-dashboard .metric-card{max-height:88px;min-height:80px}.metric-modal-head{align-items:flex-start;flex-direction:column;gap:6px}}
+@media(prefers-reduced-motion:reduce){.metric-card *{animation:none!important;transition:none!important}}
+
+/* v0.20 — busca, reuniões e recuperação */
+.search-hint{font-size:12px;margin:-4px 0 14px;color:var(--muted)}
+.search-person-field{position:relative}
+.search-results{position:absolute;top:calc(100% - 22px);left:0;right:0;z-index:12;border:1px solid var(--stroke);background:var(--surface);border-radius:10px;overflow:auto;max-height:240px;box-shadow:0 10px 30px #0005}
+.search-result{width:100%;background:transparent;color:var(--txt);border:0;padding:11px 13px;display:flex;flex-direction:column;text-align:left;gap:3px}
+.search-result:hover,.search-result:focus-visible{background:var(--surface2)}
+.search-result small{font-size:11px;color:var(--muted)}
+.meeting-tools{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.meeting-search-label{min-width:250px;flex:1}
+.meeting-search-results{border:1px solid var(--stroke);border-radius:12px;margin-bottom:16px;overflow:hidden;background:var(--surface2)}
+.meeting-match{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px;border-bottom:1px solid var(--stroke)}
+.meeting-match:last-child{border-bottom:0}.meeting-match p{margin:5px 0}.meeting-match small{color:var(--muted)}
+.employee-table{min-width:750px}
+.link-inline{background:transparent;color:var(--accent);border:0;padding:5px 0;text-align:center;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:680px){.meeting-tools{flex-direction:column;align-items:stretch}.meeting-search-label{min-width:0;width:100%}.meeting-match{align-items:stretch;flex-direction:column}}
