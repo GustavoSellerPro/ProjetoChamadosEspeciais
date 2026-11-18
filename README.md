@@ -1,3 +1,28 @@
+# ATUALIZAÇÃO v0.25 — Cadastro automático de pessoa e loja no recebimento do Forms
+
+**Leia primeiro:** [`GUIA-V025-CADASTRO-AUTOMATICO.md`](GUIA-V025-CADASTRO-AUTOMATICO.md).
+
+- **Nova migração TESTES:** `supabase/migrations/015_auto_cadastro_forms.sql`.
+- Trigger detecta novas respostas na planilha nova. Identifica/cria/vincula seller e loja com cautela; divergências vão para revisão.
+- **Caso continua manual dentro do mesmo pop-up.** Só ao criar/vincular caso é que Forms fica processado.
+- Planilha histórica nunca cadastra. Não precisa alterar Google Apps Script ou Edge Function.
+- **Não publicar na produção/main sem testes.**
+
+---
+
+# ATUALIZAÇÃO v0.24 — Conferência completa no mesmo pop-up
+
+**Leia primeiro:** [`GUIA-V024-FORMULARIO-ATE-CASO.md`](GUIA-V024-FORMULARIO-ATE-CASO.md).
+
+- **Migração nova (somente TESTES):** `supabase/migrations/014_criar_caso_e_processar_forms.sql`
+- **Tela:** `Formulários pendentes → Novas solicitações → Conferir`.
+- **Três etapas:** vincular/cadastrar pessoa → vincular/cadastrar loja → criar ou escolher caso e marcar o formulário automaticamente como **processado**.
+- **Segurança:** transação única para caso/tickets/formulário; RLS preservada e somente usuários ativos; repetições não duplicam.
+- **Não precisa** reconfigurar o Google Apps Script, webhook nem a Edge Function.
+- **Não altera `main`/produção.** Publicar apenas na branch `dev` ou em ambiente de teste.
+
+---
+
 # Seller Pro — Central de Chamados v0.8 (AMBIENTE DE TESTES)
 
 **Este pacote se conecta EXCLUSIVAMENTE ao Supabase de testes** `qpczaqrnxjncetotuhwl.supabase.co`.

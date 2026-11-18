@@ -1,0 +1,3 @@
+# Configuração exclusivamente desta função quando deploy for via Supabase CLI.
+[functions.receber-formulario]
+verify_jwt = false

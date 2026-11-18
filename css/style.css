@@ -236,3 +236,56 @@ body.light .metric-case-card{background:#eef1f5}
 .employee-table{min-width:750px}
 .link-inline{background:transparent;color:var(--accent);border:0;padding:5px 0;text-align:center;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:680px){.meeting-tools{flex-direction:column;align-items:stretch}.meeting-search-label{min-width:0;width:100%}.meeting-match{align-items:stretch;flex-direction:column}}
+
+/* v0.22 — consulta separada: novo vs histórico */
+.forms-source-tabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px;border-bottom:1px solid var(--stroke);padding-bottom:12px}
+.forms-source-tab{border:1px solid var(--stroke);border-radius:10px;background:var(--surface2);color:var(--txt);padding:10px 14px;font-size:13px;font-weight:650;cursor:pointer}
+.forms-source-tab.active,.forms-source-tab:hover{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,var(--surface2))}
+#view-formularios #formsSearch{min-width:215px;flex:1}
+.forms-source-link{display:inline-flex;align-items:center;font-size:12px;white-space:nowrap}
+@media(max-width:740px){.forms-source-tabs{gap:7px}.forms-source-tab{flex:1}.forms-source-link{white-space:normal}}
+
+
+/* v0.23 — cadastro assistido pelo formulário, sem alteração do restante do layout */
+.assisted-registration{margin-top:22px;padding-top:18px}
+.assist-heading{display:flex;justify-content:space-between;gap:15px;align-items:start;flex-wrap:wrap;margin-bottom:12px}
+.assist-heading h3{margin:0 0 5px}.assist-heading p{margin:0}
+.assist-person-block,.assist-store-block{padding:16px;border:1px solid var(--stroke);border-radius:12px;background:var(--surface2);margin:13px 0}
+.assist-person-block h4,.assist-store-block h4{font-size:14px;margin:0 0 13px}
+.assist-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.assist-grid label{position:relative;min-width:0}.assist-grid label small{font-size:11px;font-weight:400}
+.assist-span{grid-column:1/-1;font-size:12px;color:var(--muted)}
+.assist-search-results{position:absolute;top:calc(100% - 1px);left:0;right:0;max-height:220px;overflow:auto;z-index:10;background:var(--surface);border:1px solid var(--stroke);box-shadow:0 10px 30px #0004;border-radius:10px;padding:5px}
+.assist-search-results button{display:flex;width:100%;flex-direction:column;gap:3px;padding:10px;border:0;border-radius:7px;background:none;color:var(--txt);text-align:left}
+.assist-search-results button:hover{background:var(--surface2)}.assist-search-results small{color:var(--muted)}
+.assist-linked{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.assist-linked small{color:var(--muted)}
+.assist-warning{color:var(--amber);font-size:12px;margin:8px 0}
+.assist-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;margin:14px 0 0}
+.assist-actions button{min-width:170px}.assist-footnote{font-size:12px;margin-top:5px}
+@media(max-width:740px){.assist-grid{grid-template-columns:1fr}.assist-actions{flex-direction:column}.assist-actions button{width:100%}}
+
+/* v0.24 — fluxo continuo da conferencia ao caso, no mesmo popup */
+.assist-case-block{margin:16px 0 0;padding:18px;border:1px solid var(--stroke);border-radius:12px;background:var(--surface2)}
+.assist-case-block h4{font-size:15px;margin:0 0 12px}
+.assist-case-block .form-grid{margin-top:11px}
+.assist-case-new{min-width:0}
+.assist-case-new .form-grid{gap:13px}
+.assist-case-new textarea{min-height:82px}
+.assist-case-new label small{font-weight:400;font-size:11px}
+.assist-case-block .form-actions{justify-content:stretch}
+.assist-case-block .form-actions .primary{width:100%;min-height:43px}
+.assist-case-block .feedback{margin:6px 0}
+.assist-done{padding:16px;border:1px solid color-mix(in srgb,var(--green) 40%,var(--stroke));border-radius:10px;background:color-mix(in srgb,var(--green) 6%,var(--surface2))}
+.assist-done strong{color:var(--green)}
+.assist-done p{margin:8px 0 12px}
+.form-originals{margin-top:16px}
+.form-originals summary{cursor:pointer;font-weight:700;padding:8px 0}
+.form-originals .form-answers{max-height:40vh;overflow:auto;padding-right:6px}
+@media(max-width:740px){.assist-case-block{padding:12px}.assist-case-new .form-grid{grid-template-columns:1fr}}
+
+/* v0.25 - sinalizacao do cadastro automatico dos formularios */
+.assist-auto-label,.assist-review-label,.assist-manual-label{display:block;font-size:.74rem;font-weight:700;margin-top:.25rem}
+.assist-auto-label{color:#21936d}.assist-review-label{color:#c28a29}.assist-manual-label{color:var(--muted)}
+.assist-auto-note,.assist-review-note,.assist-manual-note{padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:12px}
+.assist-auto-note{border-left:3px solid #21936d}.assist-review-note{border-left:3px solid #cf9133}
+.assist-auto-note p,.assist-review-note p{margin:4px 0 0;font-size:.89rem;color:var(--muted)}
